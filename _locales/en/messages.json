@@ -1,0 +1,38 @@
+{
+  "settings": {
+    "description": "English: Settings",
+    "message": "Settings"
+  },
+  "extension_enabled": {
+    "description": "English: Enabled",
+    "message": "Enabled"
+  },
+  "settings_header": {
+    "description": "English: Settings Header",
+    "message": "Kodi HTTP Server Settings"
+  },
+  "ipaddress_input": {
+    "description": "English: IP Address Input",
+    "message": "IP Address: "
+  },
+  "port_input": {
+    "description": "English: Port Input",
+    "message": "Port: "
+  },
+  "username_input": {
+    "description": "English: Username Input",
+    "message": "Username: "
+  },
+  "password_input": {
+    "description": "English: Password Input",
+    "message": "Password: "
+  },  
+  "save": {
+    "description": "English: Save",
+    "message": "Save"
+  },
+  "clear": {
+    "description": "English: Clear",
+    "message": "Clear"
+  }
+}
