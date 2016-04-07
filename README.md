@@ -1,2 +1,1 @@
-# PlayThis-Extension
-Browser extension for PlayThis add-on
+***WIP*** Google Chrome extension for PlayThis add-on ***WIP***
