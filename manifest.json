@@ -6,6 +6,7 @@
   "description": "Adds send-to shortcuts to urlresolver supported and direct media links and attempts playback of media via PlayThis add-on in Kodi",
   "version": "1.0.0",
   "default_locale": "en",
+  "options_page": "html/settings.html",
 
   "icons": {
     "128": "images/icon_128.png",
@@ -36,14 +37,14 @@
         "https://*/*"
       ],
       "js": [
-        "js/parse.js",
-        "js/kodi_rpc.js"
+        "js/parse.js"
       ],
       "all_frames": true
     }
   ],
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ]
 }
