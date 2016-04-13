@@ -81,7 +81,6 @@ var context_playthis = function (event) {
     }
     if (url) {
         execute_rpc(remote_settings.input_ip, remote_settings.input_port, 'playthis', url)
-        console.log(result)
     }
 };
 
