@@ -1,11 +1,7 @@
 var remote_settings = null;
 
 
-chrome.contextMenus.create({
-    'title': i18n('sendto'),
-    'contexts': ['page', 'frame', 'selection', 'link', 'video'],
-    'onclick': context_playthis
-});
+load_settings()
 
 
 chrome.runtime.onConnect.addListener(function (port) {
@@ -29,6 +25,7 @@ function load_settings() {
     }, function (items) {
         remote_settings = items;
         if ((items.input_ip !== '') && (items.input_port !== '')) {
+			chrome.contextMenus.removeAll();
             chrome.contextMenus.create({
                 'title': i18n('sendto'),
                 'contexts': ['page', 'frame', 'selection', 'link', 'video'],
