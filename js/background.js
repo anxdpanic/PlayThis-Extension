@@ -8,10 +8,9 @@ chrome.storage.sync.get({
 }, function (items) {
     if ((items.extension_enabled === true) && (items.input_ip !== '') && (items.input_port !== '')) {
         remote_settings = items;
-        title = i18n('sendto');
         chrome.contextMenus.create({
             'title': i18n('sendto'),
-            'contexts': ['selection', 'link'],
+            'contexts': ['page', 'frame', 'selection', 'link', 'video'],
             'onclick': context_playthis
         });
     }
@@ -76,8 +75,17 @@ var context_playthis = function (event) {
     if (event.selectionText) {
         url = event.selectionText;
     }
-    else if (event.linkUrl) {
+    else if (event.frameUrl) {
+        url = event.frameUrl;
+    }
+	else if (event.srcUrl) {
+        url = event.srcUrl;
+    }
+	else if (event.linkUrl) {
         url = event.linkUrl;
+    }
+    else if (event.pageUrl) {
+        url = event.pageUrl;
     }
     if (url) {
         execute_rpc(remote_settings.input_ip, remote_settings.input_port, 'playthis', url)
