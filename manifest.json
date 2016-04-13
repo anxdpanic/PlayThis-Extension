@@ -3,8 +3,8 @@
 
   "name": "PlayThis",
   "short_name": "PlayThis",
-  "description": "Adds send-to PlayThis to contextmenu, sends video url to PlayThis addon in Kodi for resolving/playback",
-  "version": "0.0.0.1",
+  "description": "send-to PlayThis contextmenu, send video urls to PlayThis addon in Kodi for resolving and playback",
+  "version": "0.0.0.2",
   "default_locale": "en",
   "options_page": "html/settings.html",
 

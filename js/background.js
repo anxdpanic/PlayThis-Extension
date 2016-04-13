@@ -1,7 +1,7 @@
 var remote_settings = null;
 
 
-load_settings()
+load_settings();
 
 
 chrome.runtime.onConnect.addListener(function (port) {
@@ -12,7 +12,7 @@ chrome.runtime.onConnect.addListener(function (port) {
                 load_settings();
                 break;
             default:
-                console.log('SettingsSocket: No valid action provided');
+                console.log('SettingsSocket |No valid action provided|');
         }
     });
 });
@@ -24,8 +24,8 @@ function load_settings() {
         input_port: '9090',
     }, function (items) {
         remote_settings = items;
-        if ((items.input_ip !== '') && (items.input_port !== '')) {
-			chrome.contextMenus.removeAll();
+        if ((items.input_ip) && (items.input_port)) {
+			      chrome.contextMenus.removeAll();
             chrome.contextMenus.create({
                 'title': i18n('sendto'),
                 'contexts': ['page', 'frame', 'selection', 'link', 'video'],
@@ -39,24 +39,31 @@ function load_settings() {
 }
 
 
-function execute_rpc(ip, port, action, url) {
-    var kodi_url = 'ws://' + ip + ':' + port + '/jsonrpc';
+function execute_rpc(action, url) {
+    var ip = remote_settings.input_ip;  
+    var port = remote_settings.input_port;
+    var ws_url = 'ws://' + ip + ':' + port + '/jsonrpc';
+    var log_lead = 'execute_rpc\r\n|url| ' + ws_url + '\r\n';
     switch (action) {
         case 'playthis':
             if (url) {
-                var kodi_socket = new WebSocket(kodi_url);
+                var kodi_socket = new WebSocket(ws_url);
                 var jrpc = executeaddon_json(url);
                 kodi_socket.onopen = function (event) {
+                    console.log(log_lead + '|request| ' + jrpc);
                     kodi_socket.send(jrpc);
                 };
                 kodi_socket.onmessage = function (event) {
-                    console.log(event.data);
+                    console.log(log_lead + '|response| ' + event.data);
                     kodi_socket.close();
                 };
             }
+            else {
+                console.log('execute_rpc |Missing url for playthis action|');
+            }
             break;
         default:
-            console.log('execute_rpc: No action provided');
+            console.log('execute_rpc |No action provided|');
     }
 }
 
@@ -87,21 +94,21 @@ var context_playthis = function (event) {
     else if (event.frameUrl) {
         url = event.frameUrl;
     }
-	else if (event.srcUrl) {
+	  else if (event.srcUrl) {
         url = event.srcUrl;
     }
-	else if (event.linkUrl) {
+	  else if (event.linkUrl) {
         url = event.linkUrl;
     }
     else if (event.pageUrl) {
         url = event.pageUrl;
     }
     if (url) {
-        execute_rpc(remote_settings.input_ip, remote_settings.input_port, 'playthis', url);
+        execute_rpc('playthis', url);
     }
 };
 
 
-function i18n(i18n_data) {
-    return chrome.i18n.getMessage(i18n_data);
+function i18n(data_i18n) {
+    return chrome.i18n.getMessage(data_i18n);
 }

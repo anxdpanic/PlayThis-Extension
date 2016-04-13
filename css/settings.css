@@ -1,11 +1,11 @@
 html {
-    height: 210px;
+    height: 165px;
     width: 200px;
 }
 
 #settings-contents {
     position: absolute;
-    height: 200px;
+    height: 155px;
     width: 180px;
     margin: auto;    
 }
@@ -25,7 +25,7 @@ label {
     width: 100%;
 }
 
-#enabled-checkbox > label{
+#enabled-checkbox > label {
     vertical-align: top;
 }
 
@@ -48,7 +48,7 @@ h4#settings-header {
 
 #kodi-http-settings > label {
     display: block;
-    padding-top: 1em;
+    padding-top: 0.5em;
     padding-bottom: 0.2em;
 }
 
