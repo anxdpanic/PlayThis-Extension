@@ -8,25 +8,17 @@
     "message": "Enabled"
   },
   "settings_header": {
-    "description": "English: Settings Header",
-    "message": "Kodi HTTP Server Settings"
+    "description": "English: Kodi Remote Settings",
+    "message": "Kodi Remote Settings"
   },
   "ipaddress_input": {
-    "description": "English: IP Address Input",
-    "message": "IP Address: "
+    "description": "English: IP Address/Host: ",
+    "message": "IP Address/Host: "
   },
   "port_input": {
-    "description": "English: Port Input",
+    "description": "English: Port :",
     "message": "Port: "
   },
-  "username_input": {
-    "description": "English: Username Input",
-    "message": "Username: "
-  },
-  "password_input": {
-    "description": "English: Password Input",
-    "message": "Password: "
-  },  
   "save": {
     "description": "English: Save",
     "message": "Save"
@@ -34,5 +26,9 @@
   "clear": {
     "description": "English: Clear",
     "message": "Clear"
+  },
+  "sendto": {
+    "description": "English: sendto PlayThis",
+    "message": "sendto PlayThis"
   }
 }

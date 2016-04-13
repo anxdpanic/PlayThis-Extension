@@ -1,11 +1,11 @@
 html {
-    height: 310px;
+    height: 210px;
     width: 200px;
 }
 
 #settings-contents {
     position: absolute;
-    height: 300px;
+    height: 200px;
     width: 180px;
     margin: auto;    
 }
