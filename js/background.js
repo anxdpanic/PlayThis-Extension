@@ -1,33 +1,45 @@
 var remote_settings = null;
 
 
-chrome.storage.sync.get({
-    extension_enabled: true,
-    input_ip: '',
-    input_port: '9090',
-}, function (items) {
-    if ((items.extension_enabled === true) && (items.input_ip !== '') && (items.input_port !== '')) {
-        remote_settings = items;
-        chrome.contextMenus.create({
-            'title': i18n('sendto'),
-            'contexts': ['page', 'frame', 'selection', 'link', 'video'],
-            'onclick': context_playthis
-        });
-    }
+chrome.contextMenus.create({
+    'title': i18n('sendto'),
+    'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+    'onclick': context_playthis
 });
 
 
 chrome.runtime.onConnect.addListener(function (port) {
-    console.assert(port.name == 'KodiSocket');
+    console.assert(port.name == 'SettingsSocket');
     port.onMessage.addListener(function (msg) {
-        if (msg.details.ip && msg.details.port && msg.action && msg.details.url) {
-            execute_rpc(msg.details.ip, msg.details.port, msg.action, msg.details.url);
-        }
-        else {
-            console.log('KodiSocket: missing required information')
+        switch (msg.action) {
+            case 'load':
+                load_settings();
+                break;
+            default:
+                console.log('SettingsSocket: No valid action provided');
         }
     });
 });
+
+
+function load_settings() {
+    chrome.storage.sync.get({
+        input_ip: '',
+        input_port: '9090',
+    }, function (items) {
+        remote_settings = items;
+        if ((items.input_ip !== '') && (items.input_port !== '')) {
+            chrome.contextMenus.create({
+                'title': i18n('sendto'),
+                'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+                'onclick': context_playthis
+            });
+        }
+        else {
+            chrome.contextMenus.removeAll();
+        }
+    });
+}
 
 
 function execute_rpc(ip, port, action, url) {
@@ -88,7 +100,7 @@ var context_playthis = function (event) {
         url = event.pageUrl;
     }
     if (url) {
-        execute_rpc(remote_settings.input_ip, remote_settings.input_port, 'playthis', url)
+        execute_rpc(remote_settings.input_ip, remote_settings.input_port, 'playthis', url);
     }
 };
 

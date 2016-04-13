@@ -3,10 +3,6 @@
     "description": "English: Settings",
     "message": "Settings"
   },
-  "extension_enabled": {
-    "description": "English: Enabled",
-    "message": "Enabled"
-  },
   "settings_header": {
     "description": "English: Kodi Remote Settings",
     "message": "Kodi Remote Settings"
@@ -28,7 +24,7 @@
     "message": "Clear"
   },
   "sendto": {
-    "description": "English: sendto PlayThis",
-    "message": "sendto PlayThis"
+    "description": "English: send-to PlayThis",
+    "message": "send-to PlayThis"
   }
 }
