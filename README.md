@@ -10,3 +10,5 @@ Adds 'send-to PlayThis' contextmenu item to pages, frames, links, videos and sel
 Uses Kodi JSON-RPC over websockets to remotely execute the PlayThis addon with url/src. PlayThis will attempt to resolve the url with UrlResolver and start playback if possible.
 
 Special thanks to @konsumer420 for the icons/artwork
+
+[**PlayThis on Chrome Web Store**](https://chrome.google.com/webstore/detail/playthis/adddkaonokkecefokdanjpaamfajogel)
