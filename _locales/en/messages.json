@@ -3,25 +3,41 @@
     "description": "English: Settings",
     "message": "Settings"
   },
-  "settings_header": {
-    "description": "English: Kodi Remote Settings",
-    "message": "Kodi Remote Settings"
+  "settings_kodi_remote_header": {
+    "description": "English: Kodi Connection",
+    "message": "Kodi Connection"
   },
-  "ipaddress_input": {
-    "description": "English: IP Address/Host: ",
-    "message": "IP Address/Host: "
+  "iphost_input": {
+    "description": "English: IP/Host: ",
+    "message": "IP/Host: "
   },
   "port_input": {
-    "description": "English: Port :",
+    "description": "English: Port: ",
     "message": "Port: "
+  },
+  "tab_sub_1": {
+    "description": "English: 1",
+    "message": "1"
+  },
+  "tab_sub_2": {
+    "description": "English: 2",
+    "message": "2"
+  },
+  "tab_sub_3": {
+    "description": "English: 3",
+    "message": "3"
+  },
+  "tab_sub_4": {
+    "description": "English: 4",
+    "message": "4"
   },
   "save": {
     "description": "English: Save",
     "message": "Save"
   },
-  "clear": {
-    "description": "English: Clear",
-    "message": "Clear"
+  "version": {
+    "description": "English: version",
+    "message": "version"
   },
   "sendto": {
     "description": "English: send-to PlayThis",

@@ -3,28 +3,95 @@
     <head>
         <meta charset="utf-8">
         <!-- stylesheets -->
+        <link rel="stylesheet" href="../css/tabs.css" type="text/css">
         <link rel="stylesheet" href="../css/settings.css" type="text/css">
         <!-- /stylesheets -->
     </head>
 
     <body class="settings">
-        <div id="settings-contents">
-            <div id="settings-form">
-                <div id="settings-h4" class="header">
-                    <h4 id="settings-header" class="settings header" data-i18n="settings_header"></h4>
-                </div>
-                <div id="kodi-http-settings" class="textboxes">
-                    <label for="input-ip" class="settings label" data-i18n="ipaddress_input"></label>
-                    <input type="text" id="input-ip" class="settings text" />
+        <div class="main">
+            <div class="content">
+                <div id="content1">
+                    <input id="tab_sub1" type="radio" name="tabs_sub1" value="1" checked>
+                    <label for="tab_sub1" data-i18n="tab_sub_1"></label>
 
-                    <label for="input-port" class="settings label" data-i18n="port_input"></label>
-                    <input type="number" id="input-port" class="settings text" min="0" max="65535"/>
-                </div>
+                    <input id="tab_sub2" type="radio" name="tabs_sub1" value="2">
+                    <label for="tab_sub2" data-i18n="tab_sub_2"></label>
 
-                <div id="kodi-settings-buttons" class="buttons">
-                    <button id="button-clear" class="settings button" data-i18n="clear"></button>
-                    <button id="button-save" class="settings button" data-i18n="save"></button>
+                    <input id="tab_sub3" type="radio" name="tabs_sub1" value="3">
+                    <label for="tab_sub3" data-i18n="tab_sub_3"></label>
+
+                    <input id="tab_sub4" type="radio" name="tabs_sub1" value="4">
+                    <label for="tab_sub4" data-i18n="tab_sub_4"></label>
+                    <div class="content_sub">
+                        <div id="content_sub1">
+                            <div class="header">
+                                <h4 class="settings header" data-i18n="settings_kodi_remote_header"></h4>
+                            </div>
+                            <div class="textboxes">
+                                <div class="input_block">
+                                    <label for="iphost_1" class="settings label" data-i18n="iphost_input"></label>
+                                    <input type="text" id="iphost_1" class="settings text" />
+                                </div>
+                                <div class="input_block">
+                                    <label for="port_1" class="settings label" data-i18n="port_input"></label>
+                                    <input type="number" id="port_1" class="settings text" min="0" max="65535"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content_sub2">
+                            <div class="header">
+                                <h4 class="settings header" data-i18n="settings_kodi_remote_header"></h4>
+                            </div>
+                            <div class="textboxes">
+                                <div class="input_block">
+                                    <label for="iphost_2" class="settings label" data-i18n="iphost_input"></label>
+                                    <input type="text" id="iphost_2" class="settings text" />
+                                </div>
+                                <div class="input_block">
+                                    <label for="port_2" class="settings label" data-i18n="port_input"></label>
+                                    <input type="number" id="port_2" class="settings text" min="0" max="65535"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content_sub3">
+                            <div class="header">
+                                <h4 class="settings header" data-i18n="settings_kodi_remote_header"></h4>
+                            </div>
+                            <div class="textboxes">
+                                <div class="input_block">
+                                    <label for="iphost_3" class="settings label" data-i18n="iphost_input"></label>
+                                    <input type="text" id="iphost_3" class="settings text" />
+                                </div>
+                                <div class="input_block">
+                                    <label for="port_3" class="settings label" data-i18n="port_input"></label>
+                                    <input type="number" id="port_3" class="settings text" min="0" max="65535"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="content_sub4">
+                            <div class="header">
+                                <h4 class="settings header" data-i18n="settings_kodi_remote_header"></h4>
+                            </div>
+                            <div class="textboxes">
+                                <div class="input_block">
+                                    <label for="iphost_4" class="settings label" data-i18n="iphost_input"></label>
+                                    <input type="text" id="iphost_4" class="settings text" />
+                                </div>
+                                <div class="input_block">
+                                    <label for="port_4" class="settings label" data-i18n="port_input"></label>
+                                    <input type="number" id="port_4" class="settings text" min="0" max="65535"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="kodi-settings-buttons" class="buttons">
+                        <button id="button-save" class="settings button" data-i18n="save"></button>
+                    </div>
                 </div>
+            </div>
+            <div class="footer">
+                <div id="extension_version"></div>
             </div>
         </div>
         <!-- scripts -->
