@@ -27,26 +27,26 @@ var settings = {
     },
     defaults: {
         profiles: {
-            'active': '1',
-            '1': {
-                iphost: '',
-                port: '9090',
-                addonid: ''
+            "active": "1",
+            "1": {
+                iphost: "",
+                port: "9090",
+                addonid: ""
             },
-            '2': {
-                iphost: '',
-                port: '9090',
-                addonid: ''
+            "2": {
+                iphost: "",
+                port: "9090",
+                addonid: ""
             },
-            '3': {
-                iphost: '',
-                port: '9090',
-                addonid: ''
+            "3": {
+                iphost: "",
+                port: "9090",
+                addonid: ""
             },
-            '4': {
-                iphost: '',
-                port: '9090',
-                addonid: ''
+            "4": {
+                iphost: "",
+                port: "9090",
+                addonid: ""
             }
         }
     },
@@ -83,8 +83,7 @@ var context_menu = function() {
             'contexts': ['page', 'frame', 'selection', 'link', 'video'],
             'onclick': context_playthis
         });
-    }
-    else {
+    } else {
         chrome.contextMenus.removeAll();
     }
 }
@@ -216,25 +215,24 @@ var rpc = {
 }
 
 
-var context_playthis = function (event) {
+var context_playthis = function(event) {
     var url = null;
     if (event.selectionText) {
         url = event.selectionText;
-    }
-    else if (event.frameUrl) {
-        url = event.frameUrl;
-    }
-	  else if (event.srcUrl) {
+    } else if ((event.srcUrl) && (event.mediaType == 'video')) {
         url = event.srcUrl;
-    }
-	  else if (event.linkUrl) {
+    } else if (event.linkUrl) {
         url = event.linkUrl;
-    }
-    else if (event.pageUrl) {
+    } else if (event.frameUrl) {
+        url = event.frameUrl;
+    } else if (event.pageUrl) {
         url = event.pageUrl;
     }
     if (url) {
-        rpc.execute('execute_addon', {mode: 'play', path: url});
+        rpc.execute('execute_addon', {
+            mode: 'play',
+            path: url
+        });
     }
 };
 
