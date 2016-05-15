@@ -14,7 +14,7 @@
 
   "applications": {
     "gecko": {
-      "id": "trakt2kodiaddon@anxdpanic",
+      "id": "playthis@anxdpanic",
       "strict_min_version": "47.0a2"
     }
   },
