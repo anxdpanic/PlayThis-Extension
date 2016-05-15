@@ -12,7 +12,12 @@
     "16": "images/icon_16.png"
   },
 
-  "options_page": "html/settings.html",
+  "applications": {
+    "gecko": {
+      "id": "trakt2kodiaddon@anxdpanic",
+      "strict_min_version": "47.0a2"
+    }
+  },
 
   "browser_action": {
     "default_icon": {
@@ -34,7 +39,6 @@
   },
 
   "permissions": [
-    "background",
     "contextMenus",
     "storage"
   ]
