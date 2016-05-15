@@ -24,8 +24,8 @@ h4 {
 .content {
 	background: #FFF;
 	color: #373737;
-	min-height: 158px;
-	max-height: 158px;
+	min-height: 164px;
+	max-height: 164px;
 }
 
 div[id^="content"] {
