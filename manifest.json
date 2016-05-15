@@ -27,13 +27,6 @@
     "default_popup": "html/settings.html"
   },
 
-  "web_accessible_resources": [
-    "images/*.png",
-    "css/*.css",
-    "js/*.js",
-    "html/*.html"
-  ],
-
   "background": {
     "scripts": ["js/background.js"]
   },
