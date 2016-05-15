@@ -1,3 +1,5 @@
-Browser extension for PlayThis add-on
+![PlayThis](https://raw.githubusercontent.com/anxdpanic/PlayThis-Extension/chrome/images/icon_128.png)
 
-*See branches*
+##PlayThis (Browser Extension)
+
+_See branches_
