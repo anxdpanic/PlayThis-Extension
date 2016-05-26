@@ -1,3 +1,13 @@
+var production = true;
+
+
+function log(string) {
+    if (!production) {
+        console.log(string);
+    }
+}
+
+
 var settings = {
     _storage: function(action, arg1, arg2) {
         var has_sync = (chrome.storage.sync !== undefined) ? true : false;
@@ -105,7 +115,7 @@ var rpc = {
     },
     execute: function(action, params) {
         if (rpc.can_connect() !== true) {
-            console.log('rpc.execute(): Connection information missing/incomplete');
+            log('rpc.execute(): Connection information missing/incomplete');
             return;
         }
         var conn = new rpc.connection();
@@ -117,37 +127,37 @@ var rpc = {
                     rpc_request = rpc.stringify.execute_addon(params);
 
                 } else {
-                    console.log('rpc.execute(\'' + action + '\'): missing |params|');
+                    log('rpc.execute(\'' + action + '\'): missing |params|');
                 }
                 break;
             case 'activate_window':
                 if (params) {
                     rpc_request = rpc.stringify.activate_window(params);
                 } else {
-                    console.log('rpc.execute(\'' + action + '\'): missing |params|');
+                    log('rpc.execute(\'' + action + '\'): missing |params|');
                 }
                 break;
             default:
-                console.log('rpc.execute(): No |action| provided');
+                log('rpc.execute(): No |action| provided');
                 break;
         }
         if (rpc_request) {
             conn.socket.onopen = function() {
-                console.log(log_lead + '|request| ' + rpc_request);
+                log(log_lead + '|request| ' + rpc_request);
                 conn.socket.send(rpc_request);
             };
             conn.socket.onmessage = function(event) {
-                console.log(log_lead + '|response| ' + event.data);
+                log(log_lead + '|response| ' + event.data);
                 conn.socket.close();
             };
             conn.socket.onerror = function(event) {
                 if (event.data) {
-                    console.log(log_lead + '|ERROR| ' + event.data);
+                    log(log_lead + '|ERROR| ' + event.data);
                 }
             };
             conn.socket.onclose = function(event) {
                 if ((!event.wasClean) && (event.reason)) {
-                    console.log(log_lead + '|ERROR ' + event.code + '| ' + event.reason);
+                    log(log_lead + '|ERROR ' + event.code + '| ' + event.reason);
                 }
             };
         }
@@ -253,7 +263,7 @@ chrome.runtime.onConnect.addListener(function(port) {
                 if (msg.settings) {
                     settings.save(msg.settings);
                 } else {
-                    console.log('PlayThisSocket: |' + msg.action + '| missing |settings|');
+                    log('PlayThisSocket: |' + msg.action + '| missing |settings|');
                 }
                 break;
             case 'execute_addon':
@@ -263,7 +273,7 @@ chrome.runtime.onConnect.addListener(function(port) {
                         rpc.execute(msg.action, msg.params);
                     });
                 } else {
-                    console.log('PlayThisSocket: |' + msg.action + '| missing |params|');
+                    log('PlayThisSocket: |' + msg.action + '| missing |params|');
                 }
                 break;
             case 'with_settings':
@@ -276,7 +286,7 @@ chrome.runtime.onConnect.addListener(function(port) {
                         });
                     });
                 } else {
-                    console.log('PlayThisSocket: |' + msg.action + '| missing |cb_functions|');
+                    log('PlayThisSocket: |' + msg.action + '| missing |cb_functions|');
                 }
                 break;
             case 'get_settings':
@@ -287,7 +297,7 @@ chrome.runtime.onConnect.addListener(function(port) {
                 return true;
                 break;
             default:
-                console.log('PlayThisSocket: No valid |action| provided');
+                log('PlayThisSocket: No valid |action| provided');
                 break;
         }
     });
