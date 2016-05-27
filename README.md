@@ -14,6 +14,11 @@ The PlayThis add-on will attempt to resolve the url with UrlResolver, start play
     - PlayThis 2.x.x addon for Kodi
     - Kodi setting: _Settings -> Services -> Remote Control -> Allow remote control by programs on other systems_
 
+- Support
+    -
+
+    Post an [Issue](https://github.com/anxdpanic/PlayThis-Extension/issues) , or visit [#the_projects on Snoonet](https://kiwiirc.com/client/irc.snoonet.org/The_Projects)
+
 ---
 
 Special thanks to [@konsumer420](https://twitter.com/konsumer420) for the icons/artwork
