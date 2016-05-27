@@ -69,6 +69,8 @@ var settings = {
                 settings.get = new_settings;
                 if (callback) {
                     callback();
+                } else {
+                    context_menu();
                 }
             }
         );
