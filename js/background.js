@@ -61,23 +61,30 @@ var settings = {
         }
     },
     get: (this.defaults),
-    save: function(new_settings) {
+    save: function(new_settings, callback) {
         settings._storage(
             'set',
             new_settings,
             function() {
                 settings.get = new_settings;
+                if (callback) {
+                    callback();
+                }
             }
         );
     },
     load: function(callback) {
         settings._storage(
             'get',
-            settings.defaults,
+            null,
             function(items) {
-                settings.get = items;
-                if (callback) {
-                    callback();
+                if (JSON.stringify(items) === JSON.stringify({})) {
+                    settings.save(settings.defaults, callback);
+                } else {
+                    settings.get = items;
+                    if (callback) {
+                        callback();
+                    }
                 }
             });
     }
