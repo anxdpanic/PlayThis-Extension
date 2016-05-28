@@ -11,8 +11,13 @@ The PlayThis add-on will attempt to resolve the url with UrlResolver, start play
 - Requirements
     -
 
-    - PlayThis 2.x.x addon for Kodi
-    - Kodi setting: _Settings -> Services -> Remote Control -> Allow remote control by programs on other systems_
+    - [PlayThis 2.x.x add-on for Kodi](https://github.com/anxdpanic/plugin.video.playthis#playthis)
+    - Kodi setting: `Settings -> Services -> Remote Control -> Allow remote control by programs on other systems`
+
+- Installation
+    -
+
+    Install from [Chrome Web Store](https://chrome.google.com/webstore/detail/playthis/adddkaonokkecefokdanjpaamfajogel)
 
 - Support
     -
