@@ -5,7 +5,7 @@ Adds 'send-to PlayThis' context menu item to pages, frames, links, videos and se
 
 Uses Kodi JSON-RPC over web sockets to remotely execute the PlayThis add-on with url/src.
 
-The PlayThis add-on will attempt to resolve the url with UrlResolver, start playback if possible and keep a history of urls.
+The PlayThis add-on in Kodi will attempt to resolve the url with UrlResolver, start playback if possible and keep a history of urls.
 
 
 - Requirements
