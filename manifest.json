@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "PlayThis",
-  "description": "send-to PlayThis contextmenu, send video urls to PlayThis addon in Kodi for resolving and playback",
-  "version": "0.1.1.0",
+  "description": "PlayThis context menu, send/add video urls to PlayThis add-on in Kodi for resolving and playback",
+  "version": "0.2.0.0",
   "default_locale": "en",
 
   "icons": {
