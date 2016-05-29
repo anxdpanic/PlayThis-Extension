@@ -28,6 +28,13 @@ h4 {
 	max-height: 185px;
 }
 
+@-moz-document url-prefix() {
+	.content {
+		min-height: 192px;
+		max-height: 192px;
+	}
+}
+
 div[id^="content"] {
 	display: none;
 	padding: 10px 20px 3px;
