@@ -39,8 +39,24 @@
     "description": "English: version",
     "message": "version"
   },
-  "sendto": {
-    "description": "English: send-to PlayThis",
-    "message": "send-to PlayThis"
+  "send_to_playthis": {
+    "description": "English: Send to PlayThis",
+    "message": "Send to PlayThis"
+  },
+  "add_to_playthis": {
+    "description": "English: Add to PlayThis",
+    "message": "Add to PlayThis"
+  },
+  "show_linktester": {
+    "description": "English: Show Link-Tester context menu",
+    "message": "Show Link-Tester context menus"
+  },
+  "send_to_linktester": {
+    "description": "English: Send to Link-Tester",
+    "message": "Send to Link-Tester"
+  },
+  "add_to_linktester": {
+    "description": "English: Add to Link-Tester",
+    "message": "Add to Link-Tester"
   }
 }
