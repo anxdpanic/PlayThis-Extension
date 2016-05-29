@@ -1,7 +1,11 @@
 ![PlayThis](https://raw.githubusercontent.com/anxdpanic/PlayThis-Extension/firefox/images/icon_128.png)
 #PlayThis (Firefox)
 
-Adds 'send-to PlayThis' context menu item to pages, frames, links, videos and selections. Supports up to 4 remote Kodi profiles.
+Adds PlayThis context menu item to pages, frames, links, videos and selections.
+
+- 'Send' urls to PlayThis add-on in Kodi for resolving/playback
+- 'Add' urls for resolving/playback at a later time
+- Supports up to 4 remote Kodi profiles
 
 Uses Kodi JSON-RPC over web sockets to remotely execute the PlayThis add-on with url/src.
 
