@@ -41,22 +41,26 @@ var settings = {
             "1": {
                 iphost: "",
                 port: "9090",
-                addonid: ""
+                addonid: "",
+                linktester: false
             },
             "2": {
                 iphost: "",
                 port: "9090",
-                addonid: ""
+                addonid: "",
+                linktester: false
             },
             "3": {
                 iphost: "",
                 port: "9090",
-                addonid: ""
+                addonid: "",
+                linktester: false
             },
             "4": {
                 iphost: "",
                 port: "9090",
-                addonid: ""
+                addonid: "",
+                linktester: false
             }
         }
     },
@@ -98,10 +102,31 @@ var context_menu = function() {
     if ((settings.get.profiles[active].iphost !== '') && (settings.get.profiles[active].port)) {
         chrome.contextMenus.removeAll();
         chrome.contextMenus.create({
-            'title': i18n('sendto'),
+            'id': 'send_to_playthis',
+            'title': i18n('send_to_playthis'),
             'contexts': ['page', 'frame', 'selection', 'link', 'video'],
             'onclick': context_playthis
         });
+        chrome.contextMenus.create({
+            'id': 'add_to_playthis',
+            'title': i18n('add_to_playthis'),
+            'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+            'onclick': context_playthis
+        });
+        if (settings.get.profiles[active].linktester) {
+            chrome.contextMenus.create({
+                'id': 'send_to_linktester',
+                'title': i18n('send_to_linktester'),
+                'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+                'onclick': context_playthis
+            });
+            chrome.contextMenus.create({
+                'id': 'add_to_linktester',
+                'title': i18n('add_to_linktester'),
+                'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+                'onclick': context_playthis
+            });
+        }
     } else {
         chrome.contextMenus.removeAll();
     }
@@ -122,7 +147,7 @@ var rpc = {
         this.url = 'ws://' + settings.get.profiles[active].iphost + ':' + settings.get.profiles[active].port + '/jsonrpc';
         this.socket = new WebSocket(this.url);
     },
-    execute: function(action, params) {
+    execute: function(action, addon_id, params) {
         if (rpc.can_connect() !== true) {
             log('rpc.execute(): Connection information missing/incomplete');
             return;
@@ -132,16 +157,16 @@ var rpc = {
         var log_lead = 'rpc.execute(\'' + action + '\'):\r\n|url| ' + conn.url + '\r\n';
         switch (action) {
             case 'execute_addon':
-                if (params) {
-                    rpc_request = rpc.stringify.execute_addon(params);
+                if (addon_id && params) {
+                    rpc_request = rpc.stringify.execute_addon(addon_id, params);
 
                 } else {
                     log('rpc.execute(\'' + action + '\'): missing |params|');
                 }
                 break;
-            case 'activate_window':
-                if (params) {
-                    rpc_request = rpc.stringify.activate_window(params);
+            case 'player_open':
+                if (addon_id && params) {
+                    rpc_request = rpc.stringify.player_open(addon_id, params);
                 } else {
                     log('rpc.execute(\'' + action + '\'): missing |params|');
                 }
@@ -172,7 +197,7 @@ var rpc = {
         }
     },
     json: {
-        execute_addon: function(params) {
+        execute_addon: function(addon_id, params) {
             var active = settings.get.profiles.active;
             var out_json = {
                 jsonrpc: '2.0',
@@ -180,7 +205,7 @@ var rpc = {
                 method: 'Addons.ExecuteAddon',
                 params: {
                     wait: false,
-                    addonid: 'plugin.video.playthis',
+                    addonid: addon_id,
                     params: ''
                 }
             };
@@ -195,14 +220,15 @@ var rpc = {
             out_json['params']['params'] = outparams;
             return out_json;
         },
-        activate_window: function(params) {
+        player_open: function(addon_id, params) {
             var out_json = {
                 jsonrpc: '2.0',
                 id: 1,
-                method: 'GUI.ActivateWindow',
+                method: 'Player.Open',
                 params: {
-                    window: 'videos',
-                    parameters: ['', 'return']
+                    item: {
+                        file: ''
+                    }
                 }
             };
             this.plugin_url = function(pparams) {
@@ -216,19 +242,19 @@ var rpc = {
                     }
                     param_string += connector + key + '=' + encodeURIComponent(pparams[key]);
                 }
-                return 'plugin://plugin.video.playthis' + param_string;
+                return 'plugin://' + addon_id + param_string;
             }
             var addon_url = this.plugin_url(params);
-            out_json['params']['parameters'][0] = addon_url;
+            out_json['params']['item']['file'] = addon_url;
             return out_json;
         }
     },
     stringify: {
-        execute_addon: function(params) {
-            return JSON.stringify(rpc.json.execute_addon(params));
+        execute_addon: function(addon_id, params) {
+            return JSON.stringify(rpc.json.execute_addon(addon_id, params));
         },
-        activate_window: function(params) {
-            return JSON.stringify(rpc.json.activate_window(params));
+        player_open: function(addon_id, params) {
+            return JSON.stringify(rpc.json.player_open(addon_id, params));
         }
     }
 }
@@ -247,11 +273,53 @@ var context_playthis = function(event) {
     } else if (event.pageUrl) {
         url = event.pageUrl;
     }
+
+    var execute_params = {};
+    var addon_id = '';
+    var rpc_request_type = 'execute_addon';
+    var set_params = function(_id) {
+        switch(_id) {
+            case 'plugin.video.link_tester':
+                addon_id = 'plugin.video.link_tester';
+                if (event.menuItemId.indexOf('send') > -1) {
+                    execute_params['mode'] = 'play_link';
+                    rpc_request_type = 'player_open';
+                } else if (event.menuItemId.indexOf('add') > -1) {
+                    execute_params['mode'] = 'add_link';
+                    execute_params['refresh'] = 'false';
+                } else {
+                    execute_params['mode'] = 'add_link';
+                    execute_params['refresh'] = 'false';
+                }
+                execute_params['link'] = url;
+                break;
+            case 'plugin.video.playthis':
+            default:
+                addon_id = 'plugin.video.playthis';
+                if (event.menuItemId.indexOf('send') > -1) {
+                    execute_params['mode'] = 'play';
+                    rpc_request_type = 'player_open';
+                } else if (event.menuItemId.indexOf('add') > -1) {
+                    execute_params['mode'] = 'add';
+                } else {
+                    execute_params['mode'] = 'play';
+                    rpc_request_type = 'player_open';
+                }
+                execute_params['path'] = url;
+                break;
+        }
+    }
+
+    if (event.menuItemId.indexOf('playthis') > -1) {
+        set_params('plugin.video.playthis');
+    } else if (event.menuItemId.indexOf('linktester') > -1) {
+        set_params('plugin.video.link_tester');
+    } else {
+        set_params('plugin.video.playthis');
+    }
+
     if (url) {
-        rpc.execute('execute_addon', {
-            mode: 'play',
-            path: url
-        });
+        rpc.execute(rpc_request_type, addon_id, execute_params);
     }
 };
 
@@ -276,7 +344,7 @@ chrome.runtime.onConnect.addListener(function(port) {
                 }
                 break;
             case 'execute_addon':
-            case 'activate_window':
+            case 'player_open':
                 if (msg.params) {
                     settings.load(function() {
                         rpc.execute(msg.action, msg.params);

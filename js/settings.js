@@ -27,6 +27,7 @@ var settings = {
             s = i.toString();
             document.querySelector('input[id="iphost_' + s + '"]').value = settings.get.profiles[s].iphost;
             document.querySelector('input[id="port_' + s + '"]').value = settings.get.profiles[s].port;
+            document.querySelector('input[id="linktester_' + s + '"]').checked = settings.get.profiles[s].linktester;
         }
     },
     save: function() {
@@ -35,19 +36,23 @@ var settings = {
                 'active': document.querySelector('input[name="tabs_sub1"]:checked').value,
                 '1': {
                     iphost: document.querySelector('input[id="iphost_1"]').value,
-                    port: document.querySelector('input[id="port_1"]').value
+                    port: document.querySelector('input[id="port_1"]').value,
+                    linktester: document.querySelector('input[id="linktester_1"]').checked
                 },
                 '2': {
                     iphost: document.querySelector('input[id="iphost_2"]').value,
-                    port: document.querySelector('input[id="port_2"]').value
+                    port: document.querySelector('input[id="port_2"]').value,
+                    linktester: document.querySelector('input[id="linktester_2"]').checked
                 },
                 '3': {
                     iphost: document.querySelector('input[id="iphost_3"]').value,
-                    port: document.querySelector('input[id="port_3"]').value
+                    port: document.querySelector('input[id="port_3"]').value,
+                    linktester: document.querySelector('input[id="linktester_3"]').checked
                 },
                 '4': {
                     iphost: document.querySelector('input[id="iphost_4"]').value,
-                    port: document.querySelector('input[id="port_4"]').value
+                    port: document.querySelector('input[id="port_4"]').value,
+                    linktester: document.querySelector('input[id="linktester_4"]').checked
                 }
             }
         }
@@ -70,6 +75,15 @@ document.addEventListener('DOMContentLoaded', function() {
     load_version();
     settings.load(['settings.update']);
 });
+
+
+var checkboxes = document.getElementsByClassName('settings checkbox');
+var _length = checkboxes.length;
+for (var i = 0; i < _length; i++) {
+    checkboxes[i].addEventListener('click', function() {
+        settings.save();
+    });
+}
 
 
 document.getElementById('button-save').addEventListener('click', function() {

@@ -86,3 +86,33 @@ button[class*="settings button"]:active {
     font-size: 10px;
     margin-right: 8px;
 }
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.font_checkbox + label {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.font_checkbox {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 3px 3px;
+    width: 1.1em;
+}
+
+.font_checkbox:before {
+    content: '\2718';
+}
+
+input[type="checkbox"]:checked + .font_checkbox:before {
+    content: '\2714';
+}
+
+.checkboxes {
+    margin: 0px 8px 0px 5px;
+}
