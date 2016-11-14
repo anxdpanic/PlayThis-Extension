@@ -113,6 +113,12 @@ var context_menu = function() {
             'contexts': ['page', 'frame', 'selection', 'link', 'video', 'audio', 'image'],
             'onclick': context_playthis
         });
+        chrome.contextMenus.create({
+            'id': 'send_text_to_kodi',
+            'title': i18n('send_text_to_kodi'),
+            'contexts': ['page', 'frame', 'selection', 'link', 'video', 'audio', 'image'],
+            'onclick': context_playthis
+        });        
         if (settings.get.profiles[active].linktester) {
             chrome.contextMenus.create({
                 'id': 'send_to_linktester',
@@ -171,6 +177,13 @@ var rpc = {
                     log('rpc.execute(\'' + action + '\'): missing |params|');
                 }
                 break;
+            case 'input_send_text':
+                if (addon_id && params) {
+                    rpc_request = rpc.stringify.input_send_text(params['text']);
+                } else {
+                    log('rpc.execute(\'' + action + '\'): missing |params|');
+                }
+                break;                
             default:
                 log('rpc.execute(): No |action| provided');
                 break;
@@ -247,7 +260,20 @@ var rpc = {
             var addon_url = this.plugin_url(params);
             out_json['params']['item']['file'] = addon_url;
             return out_json;
-        }
+        },
+        input_send_text: function(send_text) {
+            var active = settings.get.profiles.active;
+            var out_json = {
+                jsonrpc: '2.0',
+                id: 1,
+                method: 'Input.SendText',
+                params: {
+                    done: false,
+                    text: send_text
+                }
+            };
+            return out_json;
+        }        
     },
     stringify: {
         execute_addon: function(addon_id, params) {
@@ -255,7 +281,10 @@ var rpc = {
         },
         player_open: function(addon_id, params) {
             return JSON.stringify(rpc.json.player_open(addon_id, params));
-        }
+        },
+        input_send_text: function(send_text) {
+            return JSON.stringify(rpc.json.input_send_text(send_text));
+        }        
     }
 }
 
@@ -264,7 +293,7 @@ var context_playthis = function(event) {
     var url = null;
     if (event.selectionText) {
         url = event.selectionText;
-    } else if ((event.srcUrl) && (event.mediaType == 'video')) {
+    } else if ((event.srcUrl) && ((event.mediaType == 'video') || (event.mediaType == 'audio') || (event.mediaType == 'image'))) {
         url = event.srcUrl;
     } else if (event.linkUrl) {
         url = event.linkUrl;
@@ -293,6 +322,11 @@ var context_playthis = function(event) {
                 }
                 execute_params['link'] = url;
                 break;
+            case 'kodi':
+                rpc_request_type = 'input_send_text';
+                addon_id = 'kodi';
+                execute_params['text'] = url;
+                break;
             case 'plugin.video.playthis':
             default:
                 addon_id = 'plugin.video.playthis';
@@ -314,6 +348,8 @@ var context_playthis = function(event) {
         set_params('plugin.video.playthis');
     } else if (event.menuItemId.indexOf('linktester') > -1) {
         set_params('plugin.video.link_tester');
+    } else if (event.menuItemId.indexOf('kodi') > -1) {
+        set_params('kodi');
     } else {
         set_params('plugin.video.playthis');
     }
