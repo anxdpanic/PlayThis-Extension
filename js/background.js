@@ -104,26 +104,26 @@ var context_menu = function() {
         chrome.contextMenus.create({
             'id': 'send_to_playthis',
             'title': i18n('send_to_playthis'),
-            'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+            'contexts': ['page', 'frame', 'selection', 'link', 'video', 'audio', 'image'],
             'onclick': context_playthis
         });
         chrome.contextMenus.create({
             'id': 'add_to_playthis',
             'title': i18n('add_to_playthis'),
-            'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+            'contexts': ['page', 'frame', 'selection', 'link', 'video', 'audio', 'image'],
             'onclick': context_playthis
         });
         if (settings.get.profiles[active].linktester) {
             chrome.contextMenus.create({
                 'id': 'send_to_linktester',
                 'title': i18n('send_to_linktester'),
-                'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+                'contexts': ['page', 'frame', 'selection', 'link', 'video', 'audio', 'image'],
                 'onclick': context_playthis
             });
             chrome.contextMenus.create({
                 'id': 'add_to_linktester',
                 'title': i18n('add_to_linktester'),
-                'contexts': ['page', 'frame', 'selection', 'link', 'video'],
+                'contexts': ['page', 'frame', 'selection', 'link', 'video', 'audio', 'image'],
                 'onclick': context_playthis
             });
         }
