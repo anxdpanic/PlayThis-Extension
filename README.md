@@ -10,13 +10,16 @@ Adds PlayThis context menu item to pages, frames, links, videos, audio, images a
 
 Uses Kodi JSON-RPC over web sockets to remotely execute the PlayThis add-on with url/src.
 
-The PlayThis add-on in Kodi will attempt to resolve the url with UrlResolver, start playback if possible and keep a history of urls.
+The PlayThis add-on will attempt to find and resolve<sup>1</sup> media from a url to play or open. A history list is available for future use/exporting to M3U<sup>2</sup>. Supports video, audio, images and executable<sup>3</sup>.
+* <sup>1</sup> resolves using URLResolver and youtube-dl
+* <sup>2</sup> M3U only usable in Kodi w/ PlayThis installed
+* <sup>3</sup> 'executable' items are urls with potential results available through scraping
 
 
 - Requirements
     -
 
-    - [PlayThis 2.x.x add-on for Kodi](https://github.com/anxdpanic/plugin.video.playthis#playthis)
+    - [PlayThis 3+ add-on for Kodi](https://github.com/anxdpanic/plugin.video.playthis#playthis)
     - Kodi setting: `Settings -> Services -> Remote Control -> Allow remote control by programs on other systems`
 
 - Installation
