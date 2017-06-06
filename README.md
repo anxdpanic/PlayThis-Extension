@@ -1,5 +1,5 @@
 ![PlayThis](https://raw.githubusercontent.com/anxdpanic/PlayThis-Extension/firefox/images/icon_128.png)
-#PlayThis (Firefox)
+# PlayThis (Firefox)
 
 Adds PlayThis context menu item to pages, frames, links, videos, audio, images and selections.
 
