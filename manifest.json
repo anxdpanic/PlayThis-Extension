@@ -12,7 +12,10 @@
     "16": "images/icon_16.png"
   },
 
-  "options_page": "html/settings.html",
+  "options_ui": {
+    "page": "/html/settings.html",
+    "chrome_style": false
+  },
 
   "browser_action": {
     "default_icon": {
@@ -23,7 +26,8 @@
   },
 
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": ["js/background.js"],
+    "persistent": true
   },
 
   "permissions": [
