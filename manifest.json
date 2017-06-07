@@ -3,7 +3,7 @@
 
   "name": "PlayThis",
   "description": "PlayThis context menu, send/add video urls to PlayThis add-on in Kodi for resolving and playback",
-  "version": "0.2.1.0",
+  "version": "0.2.2.0",
   "default_locale": "en",
 
   "icons": {
