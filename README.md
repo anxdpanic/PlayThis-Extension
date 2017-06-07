@@ -19,7 +19,7 @@ The PlayThis add-on will attempt to find and resolve<sup>1</sup> media from a ur
 - Requirements
     -
 
-    - Firefox 47.0a2+
+    - Firefox 53.0a2+
     - [PlayThis 3+ add-on for Kodi](https://github.com/anxdpanic/plugin.video.playthis#playthis)
     - Kodi setting: `Settings -> Services -> Remote Control -> Allow remote control by programs on other systems`
 
