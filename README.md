@@ -30,7 +30,7 @@ The PlayThis add-on will attempt to find and resolve<sup>1</sup> media from a ur
 - Support
     -
 
-    Post an [Issue](https://github.com/anxdpanic/PlayThis-Extension/issues) , or visit [#the_projects on Snoonet](https://kiwiirc.com/client/irc.snoonet.org/The_Projects)
+    Post an [Issue](https://github.com/anxdpanic/PlayThis-Extension/issues)
 
 ---
 
